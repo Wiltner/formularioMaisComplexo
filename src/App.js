@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      form:{
+        nome:'',
+        email:'',
+        senha:'',
+        sexo:''
+      }
+    }
+    this.dadosForm = this.dadosForm.bind(this)
+  }
+
+  dadosForm(e){
+    let form = this.state.form;
+    form[e.target.name] = e.target.value;
+    this.setState({form: form});
+  }
+
+  render(){
+    return(
+      <div>
+        <h2>Login</h2>
+        Nome:
+        <input type='text' name='nome' value={this.state.form.nome} onChange={this.dadosForm}></input ><br/>
+        Email:
+        <input type='email' name='email' value={this.state.form.email} onChange={this.dadosForm}></input><br/>
+        Senha:
+        <input type='text' name='senha' value={this.state.form.senha} onChange={this.dadosForm}></input><br/>
+        Sexo:
+        <select name='sexo' value={this.state.form.sexo} onChange={this.dadosForm}>
+          <option value='feminino'>Feminino</option>
+          <option value='masculino'>Masculino</option>
+        </select>
+      </div>
+    )
+  }
 }
 
 export default App;
